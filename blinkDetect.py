@@ -54,7 +54,12 @@ def soundAlert(path, threadStatusQ):
             FINISHED = threadStatusQ.get()
             if FINISHED:
                 break
-        playsound.playsound(path)
+        try:
+            playsound.playsound(path)
+        except Exception as e:
+            print(f"Error Playing sound: {e}")
+            traceback.print_exc()
+            break
 
 def eye_aspect_ratio(eye):
     A = dist.euclidean(eye[1], eye[5])
